@@ -150,7 +150,7 @@ export default {
 
     foreignMoney: function() {
       this.myMoney = null;
-      this.income = this.foreignMoney / this.showingCurrency.buy;
+      this.income = this.foreignMoney * this.showingCurrency.buy;
       let roundedNumber = this.income.toFixed(2);
       this.income = roundedNumber;
     },
