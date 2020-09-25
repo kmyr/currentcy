@@ -85,9 +85,22 @@
               />
             </svg>
           </span>
-          1000
+          {{ income }}
         </h3>
-        <input type="text" id="transferMoneyInput" />
+        <div class="d-flex">
+          <input
+            type="number"
+            v-model="myMoney"
+            id="transferMoneyInput"
+            placeholder="Convert Rial"
+          />
+          <input
+            type="number"
+            v-model="foreignMoney"
+            id="transferMoneyInput"
+            :placeholder="'Convert ' + showingCurrency.code"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -100,35 +113,60 @@ import Axios from "axios";
 export default {
   data() {
     return {
+      income: 0,
       currencyList: {},
       countries: [],
       showingCurrency: {
         Currency: "",
         flag: "",
-        sell: "",
-        buy: "",
+        sell: "-",
+        buy: "-",
+        code: "-"
       },
-      myMoney: 5800000,
+      myMoney: null,
+      foreignMoney: null
     };
   },
   async created() {
-    Axios.get("https://currency.jafarili.me/json").then((response) => {
+    Axios.get("https://currency.jafarili.me/json").then(response => {
       this.currencyList = response.data;
       console.clear();
     });
   },
   watch: {
+    income: function() {
+      if (this.income == "NaN") {
+        this.income = 0;
+        alert("Please Select A Currency ");
+      }
+    },
+
+    myMoney: function() {
+      this.foreignMoney = null;
+      this.income = this.myMoney / this.showingCurrency.sell;
+      let roundedNumber = this.income.toFixed(2);
+      this.income = roundedNumber;
+    },
+
+    foreignMoney: function() {
+      this.myMoney = null;
+      this.income = this.foreignMoney / this.showingCurrency.buy;
+      let roundedNumber = this.income.toFixed(2);
+      this.income = roundedNumber;
+    },
+
     "showingCurrency.Currency": function() {
       for (let i = 0; i < this.currencyList.Currency.length; i++) {
         const selectedCurrency = this.currencyList.Currency[i];
         if (selectedCurrency.Currency == this.showingCurrency.Currency) {
           this.showingCurrency.buy = selectedCurrency.Buy;
           this.showingCurrency.sell = selectedCurrency.Sell;
+          this.showingCurrency.code = selectedCurrency.Code;
           this.showingCurrency.flag = require(`../assets/flag-svg/${this.showingCurrency.Currency}.svg`);
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

@@ -3,38 +3,20 @@
   height: 300px;
   width: 100%;
 }
-.currency-section:before {
-  content: "";
-  display: block;
-  position: absolute;
-  border-radius: 100% 50%;
-  width: 60%;
-  height: 80px;
-  background-color: white;
-  right: -5px;
-  top: 285px;
-}
-.currency-section:after {
-  content: "";
-  display: block;
-  position: absolute;
-  border-radius: 100% 50%;
-  width: 60%;
-  height: 70px;
-  background-color: #2a2d44;
-  left: 0;
-  top: 250px;
-}
+
 .trasnparent-dropdown {
   background-color: transparent !important;
   border: 0;
 }
+
 .trasnparent-dropdown:focus {
   outline: none;
 }
+
 .bold-text {
   font-weight: 900;
 }
+
 .container {
   padding: 40px;
 }
@@ -44,27 +26,34 @@
   color: #fff;
   padding-left: 10px;
 }
+
 #currencyPricePart {
   text-align: center;
   padding-left: 50px;
 }
+
 #currencyPriceSection {
   text-align: center;
 }
+
 #contriesFlagIcon {
   width: 20px;
 }
+
 #currencyselect {
 }
+
 #currencySelectSection {
   margin-top: 10px;
   margin-bottom: 30px;
   margin-left: 55px !important;
   color: #fff !important;
 }
+
 #currencyConvertPrice {
   padding-left: 50px;
 }
+
 #transferMoneyInput {
   margin-left: 50px;
   background-color: transparent;
@@ -72,6 +61,7 @@
   border-bottom: 1px solid #fff;
   color: #fff;
 }
+
 input:focus {
   outline: none;
 }
